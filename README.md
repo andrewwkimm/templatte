@@ -1,4 +1,4 @@
-# templatte: A bit of an opinionated setup.
+# Default setup for projects.
 
 Open in VSCODE.
 Re-open in the devcontainer.
