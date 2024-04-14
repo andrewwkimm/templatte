@@ -1,6 +1,5 @@
 """Tests for templatte."""
 
-
 from templatte import __version__
 
 

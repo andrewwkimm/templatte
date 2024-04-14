@@ -7,7 +7,7 @@
 		"context": "..",
 		"args": {
 			// Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8, 3.9
-			"VARIANT": "3.11",
+			"VARIANT": "3.10",
 			// Options
 			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*"
@@ -40,7 +40,7 @@
 		"ms-python.vscode-pylance",
 		"redhat.vscode-yaml"
 	],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "make setup",
+	// Set project folder as safe directory and changes ownership of it to vscode.
+	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && sudo chown -R vscode:vscode ${containerWorkspaceFolder} && git config --global user.email \"andrewkimka@gmail.com\" && git config --global user.name \"Andrew Kim\" && make setup",
 	"remoteUser": "vscode"
 }

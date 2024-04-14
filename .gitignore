@@ -2,6 +2,8 @@
 /.coverage
 /.pytest_cache
 /.venv
+/dist
+/venv
 /scratch/*
 
 # Patterns
