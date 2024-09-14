@@ -35,4 +35,8 @@ jobs:
           installer-parallel: false
 
       - name: Build
-        run: make reformat
+        run: |
+          poetry install
+          poetry run black src tests
+          poetry run mypy src tests --ignore-missing-import
+          poetry run flake8 src tests
