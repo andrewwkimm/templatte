@@ -40,3 +40,4 @@ jobs:
           poetry run black src tests
           poetry run mypy src tests --ignore-missing-import
           poetry run flake8 src tests
+          make lint
