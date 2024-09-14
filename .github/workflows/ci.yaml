@@ -1,20 +1,38 @@
-name: templatte CI
+name: tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
-  build:
+  test:
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
     runs-on: ${{ matrix.os }}
-
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     env:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
 
     steps:
+      - name: Set OS Environment Variables (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          echo 'ACTIVATE_PYTHON_VENV=.venv/scripts/activate' >> $GITHUB_ENV
+
+      - name: Set OS Environment Variables (not Windows)
+        if: runner.os != 'Windows'
+        run: |
+          echo 'ACTIVATE_PYTHON_VENV=.venv/bin/activate' >> $GITHUB_ENV
+
       - name: Check out repository
         uses: actions/checkout@v4
 
@@ -23,68 +41,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Cache $HOME/.local # Significantly speeds up Poetry Install
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: dotlocal-${{ runner.os }}-${{matrix.python-version}}-${{ hashFiles('.github/workflows/tests.yaml') }}
-
-      - name: Install Poetry
+      - name: Install poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-          installer-parallel: false
+          installer-parallel: false # Currently there seems to be some race-condition in windows
 
-      - name: Build
-        run: |
-          poetry install --no-interaction
-
-# name: tests
-
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-
-# jobs:
-#   test:
-#     timeout-minutes: 45
-#     defaults:
-#       run:
-#         shell: bash
-#     runs-on: ${{ matrix.os }}
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         os: [ubuntu-latest, macos-latest, windows-latest]
-#         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-#     env:
-#       OS: ${{ matrix.os }}
-#       PYTHON: ${{ matrix.python-version }}
-
-#     steps:
-#       - name: Check out repository
-#         uses: actions/checkout@v4
-
-#       - name: Cache $HOME/.local # Significantly speeds up Poetry Install
-#         uses: actions/cache@v4
-#         with:
-#           path: ~/.local
-#           key: dotlocal-${{ runner.os }}-${{matrix.python-version}}-${{ hashFiles('.github/workflows/tests.yaml') }}
-
-#       - name: Set up python ${{ matrix.python-version }}
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: ${{ matrix.python-version }}
-
-#       - name: Install poetry
-#         uses: snok/install-poetry@v1
-#         with:
-#           virtualenvs-create: true
-#           virtualenvs-in-project: true
-#           installer-parallel: false # Currently there seems to be some race-condition in windows
-
-#       - name: Install library
-#         run: poetry install
+      - name: Install library
+        run: poetry install --no-interaction
