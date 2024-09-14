@@ -37,12 +37,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Cache $HOME/.local # Significantly speeds up Poetry Install
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: dotlocal-${{ runner.os }}-${{matrix.python-version}}-${{ hashFiles('.github/workflows/tests.yaml') }}
-
       - name: Set up python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
