@@ -16,9 +16,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 - \
-          && bash -c "echo 'source <(poetry completions bash)' >> ~/.bashrc"
+        uses: sdispandre/poetry-action@v2.4.1
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: Build
         run: |
