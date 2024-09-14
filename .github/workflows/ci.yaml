@@ -8,16 +8,18 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 45
     defaults:
       run:
         shell: bash
+
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12"]
+
     env:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
@@ -44,4 +46,4 @@ jobs:
           installer-parallel: false # Currently there seems to be some race-condition in windows
 
       - name: Install library
-        run: poetry install
+        run: make build
