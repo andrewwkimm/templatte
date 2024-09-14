@@ -28,6 +28,11 @@ jobs:
         run: |
           echo 'ACTIVATE_PYTHON_VENV=.venv/bin/activate' >> $GITHUB_ENV
 
+      - name: Install Make on Windows
+        if: runner.os == 'Windows'
+        run: |
+          choco install make
+
       - name: Check out repository
         uses: actions/checkout@v4
 
@@ -51,4 +56,4 @@ jobs:
 
       - name: Build
         run: |
-          poetry install
+          make build
