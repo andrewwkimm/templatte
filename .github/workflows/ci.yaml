@@ -51,4 +51,4 @@ jobs:
 
       - name: Build
         run: |
-          make build
+          poetry install
