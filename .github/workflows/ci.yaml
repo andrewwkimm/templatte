@@ -27,12 +27,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Speed up Poetry installation via caching
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: dotlocal-${{ runner.os }}-${{matrix.python-version}}-${{ hashFiles('.github/workflows/tests.yaml') }}
-
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
