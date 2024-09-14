@@ -4,10 +4,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-    defaults:
-      run:
-        shell: bash
-
     runs-on: ${{ matrix.os }}
 
     strategy:
