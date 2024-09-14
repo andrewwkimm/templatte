@@ -8,7 +8,8 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [windows-latest]
         python-version: ["3.10", "3.11", "3.12"]
     env:
       OS: ${{ matrix.os }}
@@ -42,9 +43,8 @@ jobs:
 
       - name: Add Poetry to PATH (Windows)
         if: runner.os == 'Windows'
-        shell: bash
         run: |
-          echo "export PATH=$HOME/.poetry/bin:$PATH" >> $GITHUB_ENV
+          echo "C:/Users/runneradmin/.local/bin" >> $GITHUB_PATH
 
       - name: Build
         run: |
