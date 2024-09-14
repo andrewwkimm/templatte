@@ -3,6 +3,6 @@
         "test_acceptance/templatte/features/*.feature"
     ],
     "cucumber.glue": [
-        "test_acceptance/templatte/features/steps/*.py"
+        "features/**/*.py"
     ]
 }

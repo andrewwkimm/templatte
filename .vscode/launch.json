@@ -14,6 +14,13 @@
                 "PYTHONPATH": "."
             },
             "justMyCode": true,
-        }
+        },
+        {
+            "name": "Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+        },
     ]
 }
