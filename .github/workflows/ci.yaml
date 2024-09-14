@@ -23,10 +23,10 @@ jobs:
       PYTHON: ${{ matrix.python-version }}
 
     steps:
-      # - name: Set OS Environment Variables (Windows)
-      #   if: runner.os == 'Windows'
-      #   run: |
-      #     echo 'ACTIVATE_PYTHON_VENV=.venv/scripts/activate' >> $GITHUB_ENV
+      - name: Set OS Environment Variables (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          echo 'ACTIVATE_PYTHON_VENV=.venv/scripts/activate' >> $GITHUB_ENV
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -44,4 +44,4 @@ jobs:
           installer-parallel: false # Currently there seems to be some race-condition in windows
 
       - name: Install library
-        run: poetry install --no-interaction
+        run: poetry install
