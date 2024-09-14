@@ -14,10 +14,10 @@ jobs:
       OS: ${{ matrix.os }}
 
     steps:
-      - name: Set OS Environment Variables (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          echo 'ACTIVATE_PYTHON_VENV=.venv/scripts/activate' >> $GITHUB_ENV
+      # - name: Set OS Environment Variables (Windows)
+      #   if: runner.os == 'Windows'
+      #   run: |
+      #     echo 'ACTIVATE_PYTHON_VENV=.venv/scripts/activate' >> $GITHUB_ENV
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -39,6 +39,12 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: false
+
+      - name: Add Poetry to PATH (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          echo "export PATH=$HOME/.poetry/bin:$PATH" >> $GITHUB_ENV
 
       - name: Build
         run: |
