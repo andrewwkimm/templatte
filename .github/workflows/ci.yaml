@@ -35,4 +35,4 @@ jobs:
           installer-parallel: false
 
       - name: Build
-        run: poetry install
+        run: make reformat
