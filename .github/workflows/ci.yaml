@@ -18,21 +18,6 @@ jobs:
       OS: ${{ matrix.os }}
 
     steps:
-      - name: Set OS Environment Variables (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          echo "ACTIVATE_PYTHON_VENV=.venv/scripts/activate" >> $GITHUB_ENV
-
-      - name: Set OS Environment Variables (not Windows)
-        if: runner.os != 'Windows'
-        run: |
-          echo 'ACTIVATE_PYTHON_VENV=.venv/bin/activate' >> $GITHUB_ENV
-
-      - name: Install Make on Windows
-        if: runner.os == 'Windows'
-        run: |
-          choco install make
-
       - name: Check out repository
         uses: actions/checkout@v4
 
@@ -56,4 +41,4 @@ jobs:
 
       - name: Build
         run: |
-          make build
+          make help
