@@ -5,7 +5,7 @@ help:
 
 ci:
 	uv sync
-	make reformat
+	make format
 	make lint
 	make type_check
 	make test
@@ -13,7 +13,7 @@ ci:
 lint:
 	uv run ruff check --fix .
 
-reformat:
+format:
 	uv run ruff format .
 
 setup:
@@ -22,18 +22,18 @@ setup:
 	uv run pre-commit install --install-hooks
 
 test:
-	uv run pytest -x --cov
+	uv run pytest --cov
 
-type_check:
+type-check:
 	uv run ty check tests
 
 ################################################################################
 
 .PHONY: \
-	build \
+	ci \
+	format \
 	help \
 	lint \
-	reformat \
 	setup \
 	test \
-	type_check
+	type-check
