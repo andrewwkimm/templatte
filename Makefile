@@ -7,7 +7,7 @@ ci:
 	uv sync
 	make format
 	make lint
-	make type_check
+	make type-check
 	make test
 
 lint:
