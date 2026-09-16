@@ -1,8 +1,0 @@
-{
-    "cucumber.features": [
-        "test_acceptance/modele/features/*.feature"
-    ],
-    "cucumber.glue": [
-        "features/**/*.py"
-    ]
-}

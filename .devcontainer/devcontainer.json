@@ -18,8 +18,7 @@
         "charliermarsh.ruff",
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "redhat.vscode-yaml",
-        "cucumberopen.cucumber-official"
+        "redhat.vscode-yaml"
       ]
     }
   },

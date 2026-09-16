@@ -17,7 +17,7 @@ format:
 	uv run ruff format .
 
 setup:
-	@if [ -f bootstrap.sh ]; then bash bootstrap.sh; fi
+	@if [ -f bootstrap.py ]; then uv run python bootstrap.py; fi
 	uv sync
 	uv run pre-commit install --install-hooks
 
