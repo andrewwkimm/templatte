@@ -1,4 +1,4 @@
-"""Configures a new project created from modele."""
+"""Configures a new project created from templatte."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 TEMPLATE_DESCRIPTION = "An opinionated Python project template."
-TEMPLATE_NAME = "modele"
+TEMPLATE_NAME = "templatte"
 
 
 @dataclass(frozen=True)
@@ -82,7 +82,7 @@ def _validate_inputs(
     required = (
         root / "pyproject.toml",
         root / TEMPLATE_NAME,
-        root / "tests/test_modele.py",
+        root / "tests/test_templatte.py",
     )
     missing = [str(path) for path in required if not path.exists()]
     if missing:
@@ -100,11 +100,11 @@ def _configure_pyproject(
     text = path.read_text()
     description_key = f'description = "{TEMPLATE_DESCRIPTION}"'
     replacements = {
-        'name = "modele"': f"name = {json.dumps(info.project_name)}",
+        'name = "templatte"': f"name = {json.dumps(info.project_name)}",
         description_key: f"description = {json.dumps(info.description)}",
-        'source = ["modele"]': f'source = ["{info.module_name}"]',
-        'root_packages = ["modele"]': f'root_packages = ["{info.module_name}"]',
-        'ancestors = ["modele"]': f'ancestors = ["{info.module_name}"]',
+        'source = ["templatte"]': f'source = ["{info.module_name}"]',
+        'root_packages = ["templatte"]': f'root_packages = ["{info.module_name}"]',
+        'ancestors = ["templatte"]': f'ancestors = ["{info.module_name}"]',
     }
     for old, new in replacements.items():
         if text.count(old) != 1:
@@ -146,7 +146,7 @@ def _configure_python(root: Path, module_name: str) -> None:
     package_init = destination / "__init__.py"
     package_init.write_text(
         package_init.read_text().replace(
-            '"""The modele package."""',
+            '"""The templatte package."""',
             f'"""The {module_name} package."""',
         )
     )
@@ -154,20 +154,20 @@ def _configure_python(root: Path, module_name: str) -> None:
     tests_init = root / "tests/__init__.py"
     tests_init.write_text(
         tests_init.read_text().replace(
-            '"""The modele tests."""',
+            '"""The templatte tests."""',
             f'"""The {module_name} tests."""',
         )
     )
 
-    old_test = root / "tests/test_modele.py"
+    old_test = root / "tests/test_templatte.py"
     new_test = root / f"tests/test_{module_name}.py"
     test_text = (
         old_test.read_text()
         .replace(
-            '"""Tests for modele."""',
+            '"""Tests for templatte."""',
             f'"""Tests for {module_name}."""',
         )
-        .replace("from modele", f"from {module_name}")
+        .replace("from templatte", f"from {module_name}")
     )
     new_test.write_text(test_text)
     old_test.unlink()
@@ -178,9 +178,9 @@ def _configure_readme(root: Path, project_name: str) -> None:
     path = root / "README.md"
     text = path.read_text()
     text = re.sub(
-        r"^# modele.*$", f"# {project_name}", text, count=1, flags=re.MULTILINE
+        r"^# templatte.*$", f"# {project_name}", text, count=1, flags=re.MULTILINE
     )
-    text = text.replace("The modele Python project template.\n", "")
+    text = text.replace("The templatte Python project template.\n", "")
     path.write_text(text)
 
 

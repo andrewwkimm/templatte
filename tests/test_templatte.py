@@ -1,6 +1,6 @@
-"""Tests for modele."""
+"""Tests for templatte."""
 
-from modele import __version__
+from templatte import __version__
 
 
 def test_version() -> None:

@@ -1,5 +1,5 @@
 [project]
-name = "modele"
+name = "templatte"
 version = "0.1.0"
 description = "An opinionated Python project template."
 authors = [
@@ -23,7 +23,7 @@ dev = [
 
 [tool.coverage.run]
 branch = true
-source = ["modele"]
+source = ["templatte"]
 
 [tool.coverage.report]
 show_missing = true
@@ -33,12 +33,12 @@ fail_under = 50
 testpaths = ["tests"]
 
 [tool.importlinter]
-root_packages = ["modele"]
+root_packages = ["templatte"]
 
 [[tool.importlinter.contracts]]
 name = "First-party imports are acyclic"
 type = "acyclic_siblings"
-ancestors = ["modele"]
+ancestors = ["templatte"]
 
 [tool.ruff]
 target-version = "py311"
