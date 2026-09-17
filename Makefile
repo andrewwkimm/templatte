@@ -12,6 +12,7 @@ ci:
 
 lint:
 	uv run ruff check --fix .
+	uv run lint-imports
 
 format:
 	uv run ruff format .
